@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中欧体育 · 资料索引与知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f6fa;
+            color: #1e1e2a;
+            line-height: 1.7;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0b0c10 0%, #1f2233 70%, #2a2d44 100%);
+            color: #eaeef2;
+            padding: 4rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #c9a05e, #d4b87a, #c9a05e);
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #f0e6d3, #d4b87a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 640px;
+            margin: 0 auto 0.25rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 0.5rem;
+        }
+
+        /* 正文容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        /* 卡片式目录感 */
+        .grid-index {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.6rem 1.8rem 1.8rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1f1f2e;
+        }
+
+        .card h3 span {
+            background: #eef0f5;
+            padding: 0.15rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            color: #4a4e69;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2e3040;
+        }
+
+        .card ul {
+            padding-left: 1.2rem;
+            margin: 0.5rem 0 0.2rem;
+        }
+
+        .card li {
+            margin-bottom: 0.3rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #ebedf3;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #3d4055;
+            margin-right: 0.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* 强调色链接 */
+        a {
+            color: #b8863a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        a:hover {
+            border-bottom-color: #b8863a;
+            color: #9a6f2c;
+        }
+
+        /* 说明区 / 提示区 */
+        .info-block {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            margin: 2.2rem 0 2rem;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+            border-left: 5px solid #c9a05e;
+        }
+
+        .info-block h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: #1c1d2b;
+        }
+
+        .info-block p {
+            margin-bottom: 0.6rem;
+        }
+
+        .tip-box {
+            background: #f8f9fc;
+            border-radius: 16px;
+            padding: 1.4rem 1.8rem;
+            margin: 2rem 0;
+            border: 1px solid #e6e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.6rem 1rem;
+        }
+
+        .tip-box .label {
+            font-weight: 600;
+            color: #4a4e69;
+            font-size: 0.85rem;
+            background: #e1e4ed;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+        }
+
+        .faq-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem 2rem;
+            margin: 2rem 0 0.5rem;
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 1rem 1.4rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+            border: 1px solid #edf0f5;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            color: #1f1f30;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .faq-item p {
+            font-size: 0.9rem;
+            color: #3b3e52;
+        }
+
+        .related-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2rem;
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e2e5ef;
+        }
+
+        .related-links a {
+            font-weight: 400;
+            border-bottom: 1px dashed #d0b27a;
+        }
+
+        .related-links a:hover {
+            border-bottom-style: solid;
+        }
+
+        /* 响应式 */
+        @media (max-width: 740px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .grid-index {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .faq-mini {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 1.8rem 1rem 3rem;
+            }
+            .info-block {
+                padding: 1.4rem 1.2rem;
+            }
+            .tip-box {
+                padding: 1rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 2.8rem 1rem 2.2rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+        }
+
+        hr {
+            margin: 2rem 0 0.5rem;
+            border: none;
+            border-top: 1px solid #dfe2ec;
+        }
+
+        .footer-note {
+            margin-top: 1.8rem;
+            font-size: 0.85rem;
+            color: #6a6d82;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 深色头图 -->
+<header class="hero">
+    <h1>中欧体育 · 知识库</h1>
+    <div class="sub">资料整理 · 信息索引 · 结构导读</div>
+</header>
+
+<main class="container">
+
+    <!-- 目录感卡片网格 -->
+    <section class="grid-index">
+        <div class="card">
+            <h3>📘 信息架构 <span>概况</span></h3>
+            <p>本索引围绕<a href="https://m-zhongousports.com">中欧体育</a>相关内容进行梳理，聚合公开资料与常识性条目。适合希望系统了解其布局的用户作为起点。</p>
+            <div style="margin-top:0.8rem;">
+                <span class="tag">赛事参考</span>
+                <span class="tag">动态通知</span>
+                <span class="tag">分类指南</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>🧭 内容分区 <span>导航示意</span></h3>
+            <ul>
+                <li>体育项目与联赛索引</li>
+                <li>数据统计与赛季简讯</li>
+                <li>使用帮助与常见查询</li>
+                <li>平台功能说明</li>
+            </ul>
+            <p style="margin-top:0.6rem; font-size:0.9rem;">各分区之间通过内部链接组织，形成网状知识结构。</p>
+        </div>
+    </section>
+
+    <!-- 说明区 -->
+    <div class="info-block">
+        <h2>📌 关于本页</h2>
+        <p>本页将<a href="https://m-zhongousports.com">中欧体育</a>相关的信息整理为若干可读模块，侧重资料归类和索引式呈现。所有内容均基于公开可查的材料，不构成任何形式的引导或建议。</p>
+        <p>页面布局采用目录卡片与要点集合，便于快速定位感兴趣的模块。提示区和 FAQ 摘录进一步补充常见疑问。</p>
+    </div>
+
+    <!-- 提示区 -->
+    <div class="tip-box">
+        <span class="label">💡 提示</span>
+        <span>如需要检索特定赛事或功能入口，可直接在网站内搜索关键词。信息更新以实际页面为准。</span>
+        <span style="font-size:0.9rem; color:#5b5f7a;">— 建议搭配使用浏览器的页面查找功能</span>
+    </div>
+
+    <!-- 相关信息区 / FAQ 摘要 -->
+    <section style="margin-top: 1.2rem;">
+        <h2 style="font-size:1.2rem; font-weight:500; margin-bottom:0.6rem; color:#1f2233;">❓ 常见知识点摘录</h2>
+        <div class="faq-mini">
+            <div class="faq-item">
+                <strong>内容更新频率？</strong>
+                <p>赛事数据及相关页面随赛季动态调整，无固定周期。建议定期浏览以获取最新信息。</p>
+            </div>
+            <div class="faq-item">
+                <strong>如何了解项目分类？</strong>
+                <p>网站首页及目录区对主流运动项目做了归类，可通过导航栏或板块标题进一步展开。</p>
+            </div>
+            <div class="faq-item">
+                <strong>是否提供历史记录？</strong>
+                <p>部分页面保留往期赛季摘要，具体范围视各模块维护情况而定。</p>
+            </div>
+            <div class="faq-item">
+                <strong>移动端适配情况？</strong>
+                <p><a href="https://m-zhongousports.com">中欧体育</a>提供移动端视图，多数内容可在手机端正常浏览，部分交互响应式调整。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 相关信息区 / 关联链接 -->
+    <div class="related-links">
+        <span style="font-weight:500; color:#2a2d44;">相关信息</span>
+        <a href="https://m-zhongousports.com" style="border-bottom:1px solid #b8863a;">中欧体育</a>
+        <a href="#" style="pointer-events:none; opacity:0.7;">术语说明</a>
+        <a href="#" style="pointer-events:none; opacity:0.7;">站点结构图</a>
+        <span style="font-size:0.85rem; color:#6a6d82;">（暂为占位示意）</span>
+    </div>
+
+    <hr>
+
+    <!-- 结尾简述，再一次自然嵌入链接 -->
+    <p style="font-size:0.95rem; color:#3b3e52;">
+        以上内容围绕<a href="https://m-zhongousports.com">中欧体育</a>的信息梳理与索引展开，兼顾知识库的目录感与可读性。如需查阅更完整的赛事库或功能说明，可直接浏览对应页面。本页不存储任何用户数据，仅作为结构示例。
+    </p>
+
+    <div class="footer-note">
+        知识库入口式 · 资料整理 · 非官方页面
+    </div>
+</main>
+
+</body>
+</html>
